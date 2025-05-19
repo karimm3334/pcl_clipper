@@ -2,6 +2,7 @@
 
 import argparse
 import numpy as np
+import matplotlib; matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 class PointCloudLoader:
@@ -173,4 +174,9 @@ def main():
     viewer.plot()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except FileNotFoundError as e:
+        print(f"failed to load pointcloud: {e}")
+    except Exception as e:
+        print(f"failed to visualize: {e}")
