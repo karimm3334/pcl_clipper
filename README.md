@@ -5,7 +5,15 @@
 ## Сборка Docker-образа
 
 ```bash
+git clone https://github.com/karimm3334/pcl_clipper.git
+cd pcl_clipper/
 docker build -t pcl_clipper:1.0.0 .
+```
+
+альтернативно можно скачать с помощью
+
+```bash
+docker pull skarius/pcl_clipper:1.0.0
 ```
 
 ## Запуск фильтрации
@@ -41,12 +49,14 @@ docker run --rm \
     pcl_clipper:1.0.0 visualize ./data/points.txt ./data/planes.txt
 ```
 
+===
+
 ## Использование Entrypoint
 
 Образ поддерживает два режима:
 
-`clip` — фильтрация точек  
-`visualize` — визуализация
+- `clip` — фильтрация точек  
+- `visualize` — визуализация
 
 Примеры:
 
@@ -58,25 +68,11 @@ docker run ... pcl_clipper:1.0.0 clip <файл_точек> <файл_плоск
 docker run ... pcl_clipper:1.0.0 visualize <файл_точек> <файл_плоскостей>
 ```
 
-
-# Инструкция по сборке и использованию
-
-```bash
-docker build -t pcl_clipper:1.0.0 .
-```
-
-### Сборка и установка
-
-```bash
-cmake -S src -B build -DCMAKE_INSTALL_PREFIX=$PWD
-cmake --build build --target install
-```
-
 ---
 
 ### Использование visualize.py
 
-```
+```bash
 usage: visualize.py [-h] [--voxel_size VOXEL_SIZE] points_filename [planes_filename]
 
 positional arguments:
@@ -91,7 +87,7 @@ optional arguments:
 
 Пример запуска:
 
-```
+```bash
 visualize.py points.txt planes.txt --voxel_size 0.02
 ```
 
@@ -103,7 +99,7 @@ visualize.py points.txt planes.txt --voxel_size 0.02
 
 ### Использование clip (C++ программа)
 
-```
+```bash
 Usage: clip <points.txt> <planes.txt> [-t]
 ```
 
@@ -113,7 +109,7 @@ Usage: clip <points.txt> <planes.txt> [-t]
 
 Пример запуска:
 
-```
+```bash
 docker run --rm -v "$(pwd)/data:/app/data" pcl_clipper:1.0.0 ./data/points.txt ./data/planes.txt -t
 ```
 
